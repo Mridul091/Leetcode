@@ -8,7 +8,6 @@ public:
         while(left<=right){
             temp= (right-left)*min(height[left], height[right]);
             water = max(water, temp);
-            cout << water << " ";
             if(height[left]>=height[right])
                 right--;
             else
