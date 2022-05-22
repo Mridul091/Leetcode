@@ -22,7 +22,7 @@ public:
 	// calculate the maximum sum with out adjacent
 	int findMaxSum(int *arr, int n) {
 	    // code here
-	    vector<int> dp(n+1,-1);
+	    vector<int> dp(n,-1);
 	    return helper(arr, n-1, dp);
 	}
 };
