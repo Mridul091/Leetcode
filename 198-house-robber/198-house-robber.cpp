@@ -1,32 +1,33 @@
 class Solution {
 public:
     
-//     int helper(int ind, vector<int> &nums, vector<int> &dp){
-//         if(ind == 0) return nums[ind];
-//         if(ind<0) return 0;
-//         if(dp[ind]!=-1) return dp[ind];
-//         int left = nums[ind] + helper(ind-2, nums, dp);
-//         int right = helper(ind-1, nums ,dp);
+    int helper(vector<int>& nums, int ind, vector<int>& dp){
+        if(ind==0) return nums[0];
+        if(ind==-1) return 0;
+        if(dp[ind]!=-1) return dp[ind];
+        int left = helper(nums, ind-1, dp);
+        int right = helper(nums,ind-2, dp) + nums[ind];
         
-//         return dp[ind] = max(left, right);
-//     }
+        return dp[ind] =  max(left, right);
+    }
     
     int rob(vector<int>& nums) {
         int n = nums.size();
         // vector<int> dp(n, 0);
-        // return helper(n-1, nums, dp);
-        
-        int prev1 = nums[0];
+        int prev1= nums[0];
         int prev2 = 0;
-        
         for(int i=1;i<n;i++){
-            int left  = nums[i];
-            if(i>1) left+= prev2;
-            int right = prev1;
-            int curr = max(left, right);
+            int left = prev1;
+            int right = nums[i];
+            if(i>1)
+                right+= prev2;
+            
+            int curr_i = max(left, right);
             prev2 = prev1;
-            prev1 = curr;
+            prev1 = curr_i;
         }
+        // for(int i=0;i<n;i++)
+        //     cout << dp[i] << " ";
         return prev1;
     }
 };
