@@ -22,16 +22,19 @@ public:
 	// calculate the maximum sum with out adjacent
 	int findMaxSum(int *arr, int n) {
 	    // code here
-	    vector<int> dp(n,0);
+	   // vector<int> dp(n,0);
 	   // return helper(arr, n-1, dp);
-	    dp[0] = arr[0];
+	    int prev1 = arr[0];
+	    int prev2 = 0;
 	    for(int i=1;i<n;i++){
-	        int left = dp[i-1];
+	        int left = prev1;
 	        int right = arr[i];
-	        if(i>1) right  += dp[i-2] ;
-	        dp[i] = max(left, right);
+	        if(i>1) right  += prev2 ;
+	        int curr_i = max(left, right);
+	        prev2 = prev1;
+	        prev1 = curr_i;
 	    }
-	    return dp[n-1];
+	    return prev1;
 	}
 };
 
