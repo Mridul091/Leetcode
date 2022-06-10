@@ -15,7 +15,7 @@ public:
                 while(!q.empty()){
                     int front = q.front();
                     q.pop();
-                    
+                    if(front==end) return true;
                     for(auto a : graph[front]){
                         if(!visited[a]){
                             q.push(a);
@@ -26,6 +26,6 @@ public:
         //     }
         // }
         
-        return visited[end];
+        return false;
     }
 };
