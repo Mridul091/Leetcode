@@ -14,19 +14,27 @@ class Solution
     {
         // Your code here
         stack<char> st;
-        for(int i=0;i<s.size();i++){
-            if(st.empty())
-                st.push(s[i]);
+        st.push(s[0]);
+        string res;
+        res += st.top();
+        for(int i=1;i<s.size();i++){
+            // if(st.empty()){
+            //     st.push(s[i]);
+            // }
             
             if(st.top()==s[i]) continue;
-            else st.push(s[i]);
+            else{
+                
+             st.push(s[i]);
+             res += s[i];
+            }
         }
-        string res="";
-        while(!st.empty()){
-            res+= st.top();
-            st.pop();
-        }
-        reverse(res.begin(), res.end());
+        // string res="";
+        // while(!st.empty()){
+        //     res+= st.top();
+        //     st.pop();
+        // }
+        // reverse(res.begin(), res.end());
         return res;
     }
 };
