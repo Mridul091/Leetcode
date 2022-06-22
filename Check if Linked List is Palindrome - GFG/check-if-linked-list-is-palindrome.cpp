@@ -32,41 +32,71 @@ struct Node {
 class Solution{
   public:
     
-    Node* reverse(Node* head){
-        Node* curr = head;
-        Node* prev = NULL;
-        while(curr!=NULL){
-            Node* next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
-    }
-    Node* findmid(Node*head){
-        Node* fast = head;
-        Node* slow = head;
-        while(fast!=NULL && fast->next!=NULL){
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        return slow;
-    }
+    // Node* reverse(Node* head){
+    //     Node* curr = head;
+    //     Node* prev = NULL;
+    //     while(curr!=NULL){
+    //         Node* next = curr->next;
+    //         curr->next = prev;
+    //         prev = curr;
+    //         curr = next;
+    //     }
+    //     return prev;
+    // }
+    // Node* findmid(Node*head){
+    //     Node* fast = head;
+    //     Node* slow = head;
+    //     while(fast!=NULL && fast->next!=NULL){
+    //         slow = slow->next;
+    //         fast = fast->next->next;
+    //     }
+    //     return slow;
+    // }
     //Function to check whether the list is palindrome.
+    // int length(Node *head){
+    // int len = 1;
+    // while(head->next ){
+    //     head = head->next;
+    //     len++;
+    // }
+
+
     bool isPalindrome(Node *head)
     {
         //Your code here
-    if(head==NULL) return true;
-    Node *mid = findmid(head);
-    Node *last = reverse(mid);
-    Node *curr = head;
-    while(last!=NULL){
-        if(last->data!=curr->data)
-            return false;
-        last = last->next;
-        curr = curr->next;
-    }
-    return true;
+         if(!head || !head->next) return true;
+        Node* pre = NULL;
+        Node* temp = head;
+        int len = 0;
+        while(temp){
+            len++;
+            temp=temp->next;
+        }
+        Node* middle = head;
+        int mid= (len-1)/2;
+        bool isPalindrome= true; 
+        
+        for(int i = 0;i<mid;i++) {
+        middle= middle->next;
+        }
+        Node* curr = middle->next;
+        Node* next = curr->next;
+        while(curr){
+            curr->next = pre;
+            pre = curr;
+            curr = next;
+            if(next)
+                next = next->next;
+        }
+        middle ->next = pre;
+        temp = head;
+        while(pre){
+            if(temp->data!=pre->data)return false;
+            temp=temp->next;
+            pre = pre->next;
+        }
+        
+   return true;
     }
 };
 
