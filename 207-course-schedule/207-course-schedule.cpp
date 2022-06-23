@@ -4,8 +4,8 @@ public:
         vector<vector<int>> adj(numCourses);
         vector<int> indegree(numCourses,0);
         for(auto &a :prerequisites){
-            adj[a[0]].push_back(a[1]);
-            indegree[a[1]]++;
+            adj[a[1]].push_back(a[0]);
+            indegree[a[0]]++;
         }
         
         queue<int> q;
