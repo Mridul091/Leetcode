@@ -12,8 +12,8 @@ public:
         }
         vector<vector<string>> res;
         for(auto it: mp){
-            vector<string> temp = it.second;
-            res.push_back(temp);
+            
+            res.push_back(it.second);
         }
         return res;
     }
