@@ -3,6 +3,7 @@ private:
      vector<vector<int>> dirs = {{0,1}, {0,-1}, {1,0}, {-1,0}};
 public:
     
+    
     void bfs(vector<vector<char>> &grid, int n, int m ,int i, int j){
         queue<int> q;
         // 2d->1d= R* #col + C
@@ -24,6 +25,7 @@ public:
                 }
             }
         }
+    
     }
     
     int numIslands(vector<vector<char>>& grid) {
