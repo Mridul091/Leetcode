@@ -4,7 +4,7 @@ public:
     int n;
     
     MyHashSet() {
-        n = 100;
+        n = 1e6;
         m.resize(n);
     }
     int hash(int key){
