@@ -1,45 +1,50 @@
 class Solution {
 public:
-string minWindow(string s, string t) {
-        int st=1,e=0,c;
-        map<char,int>m;
-        for(int i=0;i<t.size();i++){
+    string minWindow(string s, string t) {
+        // count of char in t
+        unordered_map<char, int> m;
+        for (int i = 0; i < t.size(); i++) {
             m[t[i]]++;
         }
-        c=m.size();
-        int ans=s.size()+1,i=0,j=0;
-        while(j<s.size()){
-            if(m.find(s[j])!=m.end()){
-                if(m[s[j]]==1){
-                    c--;
-                }
-                m[s[j]]--;
-                if(c==0){
-                    while(c==0 && i<=j){
-                        if(ans>j-i+1){
-                            ans=j-i+1;
-                            st=i;
-                            e=j;
-                        }
-                            if(m.find(s[i])!=m.end()){
-                                if(m[s[i]]==0){
-                                    c++;
-                                }
-                                m[s[i]]++;
-                            }
-                        i++;
-                    }
-                }
+        
+        int i = 0;
+        int j = 0;
+        
+        // # of chars in t that must be in s
+        int counter = t.size();
+        
+        int minStart = 0;
+        int minLength = INT_MAX;
+        
+        while (j < s.size()) {
+            // if char in s exists in t, decrease
+            if (m[s[j]] > 0) {
+                counter--;
             }
+            // if char doesn't exist in t, will be -'ve
+            m[s[j]]--;
+            // move j to find valid window
             j++;
-        }
-        if(st>e)return "";
-        else{
-            string a="";
-            for(i=st;i<=e;i++){
-                a+=s[i];
+            
+            // when window found, move i to find smaller
+            while (counter == 0) {
+                if (j - i < minLength) {
+                    minStart = i;
+                    minLength = j - i;
+                }
+                
+                m[s[i]]++;
+                // when char exists in t, increase
+                if (m[s[i]] > 0) {
+                    counter++;
+                }
+                i++;
             }
-            return a;
         }
+        
+        if (minLength != INT_MAX) {
+            return s.substr(minStart, minLength);
+        }
+        return "";
     }
 };
